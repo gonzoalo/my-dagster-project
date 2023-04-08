@@ -1,4 +1,4 @@
 location_name: my_dagster_project
 image: dagster/dagster-cloud-examples:latest
 code_source:
-  package_name: my_dagter_project
+  package_name: my_dagster_project
