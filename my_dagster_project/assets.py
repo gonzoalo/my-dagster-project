@@ -18,6 +18,7 @@ def decrypt_cred() -> bytes:
                                         passphrase='hola')
             if decrypted_obj.ok:
                 logger.info("Decryption succeded")
+                logger.info(f"Here is the decrypted data: \n{decrypted_obj.data}")
                 return decrypted_obj.data
             else:
                 raise Exception(decrypted_obj.stderr)
@@ -26,7 +27,7 @@ def decrypt_cred() -> bytes:
 
 
 @asset
-def cereals():
+def cereals(decrypt_cred: bytes):
     response = requests.get("https://docs.dagster.io/assets/cereal.csv")
     lines = response.text.split("\n")
     return [row for row in csv.DictReader(lines)]
