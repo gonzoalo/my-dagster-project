@@ -5,7 +5,8 @@ setup(
     packages=find_packages(exclude=["my_dagster_project_tests"]),
     install_requires=[
         "dagster",
-        "dagster-cloud"
+        "dagster-cloud",
+        "python-gnupg==0.5.0"
     ],
     extras_require={"dev": ["dagit", "pytest"]},
 )

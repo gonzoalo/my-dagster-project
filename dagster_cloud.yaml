@@ -1,5 +1,8 @@
 locations:
   - location_name: my_dagster_project
-    image: dagster/dagster-cloud-examples:latest
+    # image: dagster/dagster-cloud-examples:latest
     code_source:
       package_name: my_dagster_project
+    build:
+      directory: ./
+      registry: 764506304434.dkr.ecr.us-west-2.amazonaws.com/branch-deployments-gh-action-test

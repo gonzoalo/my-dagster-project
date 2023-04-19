@@ -1,8 +1,29 @@
 import csv
+import os
 import requests
-from dagster import asset
+from dagster import asset, get_dagster_logger
 import urllib.request
 import zipfile
+import gnupg
+logger = get_dagster_logger()
+
+dag_group_name = "my-dagster-project"
+
+@asset
+def decrypt_cred() -> bytes:
+    try:
+        gpg = gnupg.GPG()
+        with open('google_secret.json.gpg', 'rb') as f:
+            decrypted_obj = gpg.decrypt(message=f.read(), 
+                                        passphrase='hola')
+            if decrypted_obj.ok:
+                logger.info("Decryption succeded")
+                return decrypted_obj.data
+            else:
+                raise Exception(decrypted_obj.stderr)
+    except Exception as e:
+        logger.error(f"{dag_group_name} error, asset: get_creds_data, error: {str(e)}")
+
 
 @asset
 def cereals():
